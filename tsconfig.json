@@ -4,11 +4,12 @@
         "module": "ESNext",
         "moduleResolution": "bundler",
         "lib": ["ES2020", "DOM"],
+        "types": ["node"],
+        "rootDir": "./src",
         "strict": true,
         "noImplicitAny": true,
         "esModuleInterop": true,
-        "sourceMap": true,
-        "outDir": "./dist"
+        "sourceMap": true
     },
     "include": ["src"]
 }
