@@ -15,7 +15,7 @@ class News implements Drawable<Article> {
             if (idx % 2) getElement<HTMLElement>('.news__item', newsClone).classList.add('alt');
 
             getElement<HTMLElement>('.news__meta-photo', newsClone).style.backgroundImage = `url(${
-                item.urlToImage || 'img/news_placeholder.jpg'
+                item.urlToImage || 'img/news_placeholder.svg'
             })`;
             const { author, date } = this.formatMeta(item);
             getElement<HTMLElement>('.news__meta-author', newsClone).textContent = author;
