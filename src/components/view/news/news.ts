@@ -1,5 +1,5 @@
 import './news.css';
-import { Article, Drawable } from '../../../types';
+import { Article, ArticleMeta, Drawable } from '../../../types';
 import { getElement } from '../../../utils/dom';
 
 class News implements Drawable<Article> {
@@ -17,12 +17,9 @@ class News implements Drawable<Article> {
             getElement<HTMLElement>('.news__meta-photo', newsClone).style.backgroundImage = `url(${
                 item.urlToImage || 'img/news_placeholder.jpg'
             })`;
-            getElement<HTMLElement>('.news__meta-author', newsClone).textContent = item.author || item.source.name;
-            getElement<HTMLElement>('.news__meta-date', newsClone).textContent = item.publishedAt
-                .slice(0, 10)
-                .split('-')
-                .reverse()
-                .join('-');
+            const { author, date } = this.formatMeta(item);
+            getElement<HTMLElement>('.news__meta-author', newsClone).textContent = author;
+            getElement<HTMLElement>('.news__meta-date', newsClone).textContent = date;
 
             getElement<HTMLElement>('.news__description-title', newsClone).textContent = item.title;
             getElement<HTMLElement>('.news__description-source', newsClone).textContent = item.source.name;
@@ -35,6 +32,13 @@ class News implements Drawable<Article> {
         const container = getElement<HTMLElement>('.news');
         container.innerHTML = '';
         container.appendChild(fragment);
+    }
+
+    private formatMeta({ author, source, publishedAt }: ArticleMeta): { author: string; date: string } {
+        return {
+            author: author || source.name,
+            date: publishedAt.slice(0, 10).split('-').reverse().join('-'),
+        };
     }
 }
 

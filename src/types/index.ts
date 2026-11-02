@@ -66,3 +66,5 @@ export type Callback<T> = (data: T) => void;
 export interface Drawable<T> {
     draw(data: T[]): void;
 }
+
+export type ArticleMeta = Pick<Article, 'author' | 'source' | 'publishedAt'>;
